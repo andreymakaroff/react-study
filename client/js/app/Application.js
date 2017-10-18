@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AddPostForm from './components/AddPostForm';
+import PostForm from './components/PostForm';
 import Banner from './components/Banner';
 import EditPostModal from './components/PostEditModal';
 import Post from './components/Post';
@@ -7,7 +7,10 @@ import Post from './components/Post';
 export default class Application extends Component {
 
     state = {
-        posts : {}
+        posts : {},
+        isOpenedModal: false,
+        activePost: null,
+        activePostKey: null
     };
 
     constructor(props) {
@@ -24,6 +27,19 @@ export default class Application extends Component {
         });
     };
 
+    updatePost = (updatedPost) => {
+        let {posts, activePostKey} = this.state;
+
+        posts[activePostKey] = updatedPost;
+
+        this.setState({
+            isOpenedModal: false,
+            activePost: null,
+            activePostKey: null,
+            posts
+        });
+    };
+
     handleDeletePost = (key) => {
         const {posts} = this.state;
         delete posts[key];
@@ -35,12 +51,25 @@ export default class Application extends Component {
 
     handleEditPost = (key) => {
         const {posts} = this.state;
+        const activePost = posts[key];
+
+        this.setState({
+            isOpenedModal: true,
+            activePostKey: key,
+            activePost
+        });
+    };
+
+    handleCloseModal = () => {
+        this.setState({
+            isOpenedModal: false,
+            activePost: null,
+            activePostKey: null
+        });
     };
 
     renderPost = (key) => {
         const postData = this.state.posts[key];
-
-        console.log(postData);
 
         return (
             <Post
@@ -101,13 +130,17 @@ export default class Application extends Component {
                         author="Jack Sherlock"
                         comments="7"
                     />
-
                     <div className="list-of-posts">
                         {Object.keys(this.state.posts).map(this.renderPost)}
                     </div>
-                    <AddPostForm addPost={this.addPost} />
+                    <PostForm addPost={this.addPost} />
                 </div>
-                <EditPostModal />
+                <EditPostModal
+                    onCloseModal={this.handleCloseModal}
+                    isOpenModal={this.state.isOpenedModal}
+                    activePost={this.state.activePost}
+                    onUpdatePost={this.updatePost}
+                />
             </div>
         )
     }

@@ -1,39 +1,31 @@
 import React, { Component } from 'react';
 import Modal from 'react-awesome-modal';
-
-import AddPostForm from './AddPostForm';
+import PropTypes from 'prop-types';
+import PostForm from './PostForm';
 
 export default class PostEditModal extends Component {
 
-    state = {
-        visible: false
+    static propTypes = {
+        isOpenModal: PropTypes.bool,
+        onCloseModal: PropTypes.func,
+        activePost: PropTypes.object,
+        onUpdatePost: PropTypes.func.isRequired
     };
 
     constructor(props) {
         super(props)
     };
 
-    openModal = () => {
-        this.setState({visible: true});
-    };
-
-    closeModal = () => {
-        this.setState({visible: false});
-    };
-
-
     render() {
         return (
             <div>
                 <Modal
-                    visible={this.state.visible}
-                    width="400"
-                    height="300"
+                    visible={this.props.isOpenModal}
                     effect="fadeInUp"
-                    onClickAway={() => this.closeModal}
+                    onClickAway={this.props.onCloseModal}
                 >
-                    <AddPostForm />
-                    <button onClick={this.closeModal}>Close</button>
+                    <PostForm onUpdatePost={this.props.onUpdatePost} activePost={this.props.activePost} />
+                    <button className="button primary" onClick={this.props.onCloseModal}>Close</button>
                 </Modal>
             </div>
         )
