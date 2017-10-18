@@ -45,7 +45,7 @@ export default class PostForm extends Component {
 
         (activePost) ? onUpdatePost(post) : addPost(post);
 
-        this.setState(intitalState);
+        this.setState(initialState);
     };
 
     handleChangeInput = (field) => (event) => {
