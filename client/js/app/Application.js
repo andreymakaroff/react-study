@@ -94,6 +94,7 @@ export default class Application extends Component {
         const imgThree ="https://c2.staticflickr.com/6/5738/23929500196_b6a1ce1dfb_b.jpg";
         const imgFour ="https://pixabay.com/static/uploads/photo/2015/09/14/19/15/aerial-landscape-939963_960_720.jpg";
         const dummyPost = "Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus.";
+        const {posts, isOpenedModal, activePost} = this.state;
 
         return (
             <div>
@@ -131,14 +132,14 @@ export default class Application extends Component {
                         comments="7"
                     />
                     <div className="list-of-posts">
-                        {Object.keys(this.state.posts).map(this.renderPost)}
+                        {Object.keys(posts).map(this.renderPost)}
                     </div>
                     <PostForm addPost={this.addPost} />
                 </div>
                 <EditPostModal
                     onCloseModal={this.handleCloseModal}
-                    isOpenModal={this.state.isOpenedModal}
-                    activePost={this.state.activePost}
+                    isOpenModal={isOpenedModal}
+                    activePost={activePost}
                     onUpdatePost={this.updatePost}
                 />
             </div>

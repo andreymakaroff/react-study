@@ -17,15 +17,25 @@ export default class PostEditModal extends Component {
     };
 
     render() {
+        const {isOpenModal, onCloseModal, activePost, onUpdatePost} = this.props;
+
         return (
             <div>
                 <Modal
-                    visible={this.props.isOpenModal}
+                    visible={isOpenModal}
                     effect="fadeInUp"
-                    onClickAway={this.props.onCloseModal}
+                    onClickAway={onCloseModal}
                 >
-                    <PostForm onUpdatePost={this.props.onUpdatePost} activePost={this.props.activePost} />
-                    <button className="button primary" onClick={this.props.onCloseModal}>Close</button>
+                    <PostForm
+                      onUpdatePost={onUpdatePost}
+                      activePost={activePost}
+                    />
+                    <button
+                      className="button primary"
+                      onClick={onCloseModal}
+                    >
+                        Close
+                    </button>
                 </Modal>
             </div>
         )

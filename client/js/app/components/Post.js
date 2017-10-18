@@ -37,7 +37,7 @@ export default class Post extends Component {
 
     render() {
         const com = "Comments";
-        const {ptitle, pimg, postbody, author, comments, enableDelete, enableEdit} = this.props;
+        const {ptitle, pimg, postbody, author, comments, enableDelete, enableEdit, date} = this.props;
 
         return (
             <div className="blog-post">
@@ -47,7 +47,7 @@ export default class Post extends Component {
                 }
                 <h3 className="ptitle">
                     {ptitle}
-                    <small>{this.props.date}</small>
+                    <small>{date}</small>
                 </h3>
                 <img className="thumbnail" src={pimg} />
                 <p>{postbody}</p>

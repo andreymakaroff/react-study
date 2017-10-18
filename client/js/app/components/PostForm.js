@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const intitalState = {
+const initialState = {
     title: '',
     name: '',
     desc: '',
@@ -10,7 +10,7 @@ const intitalState = {
 
 export default class PostForm extends Component {
 
-    state = intitalState;
+    state = initialState;
 
     static propTypes = {
         activePost: PropTypes.object,
